@@ -34,13 +34,7 @@ This package and the underlying X!Tandem code are distributed under the Artistic
 
 \section{Introduction}
 
-X!Tandem is an open source software for protein identification by tandem mass spectrometry, and rTANDEM encapsulates this software in R. As of now, rTANDEM provides rather basic encapsulation of X!Tandem: it has a function that takes as an argument the path to an X!Tandem style parameter file and return the path to an X!tandem style output file. The package also presents some functions to transform parameters or results files into R objects and vice versa. Furthermore, some functions are available toexamine the results within R.
-
-\section{Manifesto}
-
-Most analytic pipelines for protein identification using tandem mass spectrometry experiments are proprietary. Those pipelines often have the advantage of being user-friendly (to a certain extent), but reliance on proprietary pipelines has many downfalls. Proprietary pipelines hinder collaboration between labs by making it more difficult to analyze data that have been obtained in a different pipeline. It prevents the development of new types of analyses or of new scientific questions by preventing the researchers from modifying the algorithms or inner settings of the analytic tools. It creates a 'black box' phenomenon where the results given by the analytic tools are to be trusted even though the process by which they have been obtained cannot be fully examined, tested or modified. 
-
-The encapsulation of X!Tandem in R is a fisrt step towards building a viable analytic pipeline for protein identification in R. The goal is to make R an interesting and powerful framework for ms/ms data analysis just like it is for NGS analysis.
+X!Tandem is an open source software for protein identification by tandem mass spectrometry, and rTANDEM encapsulates this software in R. rTANDEM provides basic encapsulation of X!Tandem: it has a function that takes as an argument the path to an X!Tandem style parameter file and return the path to an X!tandem style output file. The package also presents functions to transform parameters or results files into R objects and vice versa. Some functions are also available to examine the results within R. An associated package, shinyTANDEM, provides a graphical interface to visualize results objects.
 
 \section{rTANDEM input/output overview}
 
@@ -78,6 +72,11 @@ The database files contain the information that will be used to analyse the spec
 
 The default-parameter file is used to set fine-grained parameters. For example it is used to set the mass error tolerated, or to set which types of ions will be used for calculation. This file is not usually modified for every experiment, rather, a default-parameter can be created for every instrument used (the fine-grained parameters are often instrument-specific).  
 The default-parameter file also provides links to formatting files (css and xsl) that are useful for consulting the output in a web browser. 
+
+\subsection{Parameters information}
+The official API for x!tandem parameters is described here: http://thegpm.org/TANDEM/api/
+Some parameters are accepted even though they are not part of the official API. A list of such parameters can be found at: http://tools.proteomecenter.org/wiki/index.php?title=TPP:X!Tandem\_the\_TPP
+The k-score scoring function is now available in rTANDEM. To use this scoring function, set the parameter 'scoring, algorithm' to 'k-score'. 
 
 \section{rTANDEM typical usage}
 

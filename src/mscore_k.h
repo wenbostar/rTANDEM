@@ -83,14 +83,16 @@ public:
 
 class mscore_k : public mscore
 {
-protected:
+
+ protected:
     friend class mscorefactory_k;
 
-    mscore_k(void);    // Should only be created through mscorefactory_tandem
+    float score_k(void);    // Should only be created through mscorefactory_tandem
 
 public:
+    mscore_k(void);
     virtual ~mscore_k(void);
-
+    
 public:
     virtual bool load_param(XmlParameter &_x); // allows score object to issue warnings,
                                                // or set variables based on xml
@@ -107,6 +109,9 @@ public:
 
 protected:
     virtual double dot(unsigned long *_v); // this is where the real scoring happens
+    ////////////////////////
+    float ion_check(unsigned long foo, size_t bar);
+    ////////////////////////
 
 protected:
     unsigned long imass(double _m)

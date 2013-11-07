@@ -23,7 +23,7 @@
 
 // Factory instance, registers itself with the mscoremanager.
 static mscorefactory_k factory;
-	
+
 mscorefactory_k::mscorefactory_k()
 {
     mscoremanager::register_factory("k-score", this);
@@ -360,4 +360,8 @@ double mscore_k::dot(unsigned long *_v)
 
     *_v = lCount;    
     return (dScore);
+}
+
+float mscore_k::ion_check(unsigned long foo, size_t bar){
+  return 0.0f;
 }
