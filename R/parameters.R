@@ -114,8 +114,13 @@ rTParam <- function() {
   return(rTParam)
 }
 
-setParamValue <- function(param, category, parameter, value) {
-  key <- paste(category, parameter, sep=", ")
+setParamValue <- function(param, category, parameter=NULL, value) {
+  if( is.null(parameter) ){
+    key <- category
+  } else {
+    key <- paste(category, parameter, sep=", ")
+  }
+  
   if (is.null(param[[key]])){
     warning("This category/parameter combination is not recognized by rTANDEM. It might be due to a typo, or to the use of an undocumented parameter. After the analysis, check your result's 'used.parameters' and 'unused.parameters' slots to confirm that the parameter was successfully used.")
   }
@@ -235,7 +240,7 @@ setParamQuadTof100ppm <- function(param=NULL) {
     "spectrum", "fragment monoisotopic mass error units", "ppm",
     "spectrum", "parent monoisotopic mass error plus", 100,
     "spectrum", "parent monoisotopic mass error minus", 100,
-    "spectrum", "parent monoisotopic mass error units",	ppm,
+    "spectrum", "parent monoisotopic mass error units",	"ppm",
     "spectrum", "parent monoisotopic mass isotope error", "yes" ) )
 
   for( i in 1:nrow(myValues) ){
@@ -258,7 +263,7 @@ setParamIonTrap <- function(param=NULL) {
     "spectrum", "fragment monoisotopic mass error units", "Daltons",
     "spectrum", "parent monoisotopic mass error plus", 3.0,
     "spectrum", "parent monoisotopic mass error minus", 0.5,
-    "spectrum", "parent monoisotopic mass error units",	Daltons,
+    "spectrum", "parent monoisotopic mass error units",	"Daltons",
     "spectrum", "parent monoisotopic mass isotope error", "no" ) )
   
   for( i in 1:nrow(myValues) ){
@@ -267,7 +272,7 @@ setParamIonTrap <- function(param=NULL) {
   return(param)
 }
 
-rTTaxo <- function(taxon=NA, format=NA, URL=NA) {
+rTTaxo <- function(taxon, format="peptide", URL) {
   # Constructor method for rTTaxo
   # Args:
   #    taxon : A taxon for the taxonomy (eg. "yeast") or a vector of taxa.
@@ -275,6 +280,11 @@ rTTaxo <- function(taxon=NA, format=NA, URL=NA) {
   #    URL   : The path to the database file or a vector of paths.
   # Returns:
   #    A rTTaxo object.
+
+  if( ! format %in% c("peptide", "spectrum", "saps", "mods") ){
+    warning(paste("\"", format, "\" might not be recognized. The four formats of database for tandem are: peptide, spectrum, mods, and saps.", sep=""))
+  }
+  
   rTTaxo <- data.frame(
                        row.names=NULL,
                        taxon=taxon,
@@ -285,7 +295,7 @@ rTTaxo <- function(taxon=NA, format=NA, URL=NA) {
   return(rTTaxo)
 }
 
-addTaxon <- function(taxonomy=NULL, taxon, format="peptide", URLs){
+addTaxon <- function(taxonomy=NULL, taxon, format="peptide", URL){
   # Adds a new taxon to a rTTaxo object.
   # Args:
   #    taxonomy: a rTTaxo object to which a new taxon will be added.
@@ -294,10 +304,21 @@ addTaxon <- function(taxonomy=NULL, taxon, format="peptide", URLs){
   #    URLs    : a string or a vector containing the paths to the databases.
   # Returns:
   #    A rTTaxo object.
+  if( is.null(taxonomy) ){
+    return(rTTaxo(taxon=taxon, format=format,URL=URL))
+  }
+  if(! "rTTaxo" %in% class(taxonomy) ){
+    stop("The taxonomy object must be of the class 'rTTaxo'.")
+  }
+  new.taxon <- rTTaxo(taxon=taxon, format=format, URL=URL)
+  rTTaxo <- rbind(taxonomy, new.taxon)
+  class(rTTaxo) <- c('rTTaxo', 'data.frame')
+  return(rTTaxo)
 }
 
-
 .checkParam <- function(param) {
+  # Used to check the validity of the 'param' object
+  # passed to the various setParam functions. 
   if (! is.null(param) && ! "rTParam" %in% class(param) ) {
     stop("The parameter object must be of the class 'rTParam'")
   }
@@ -305,3 +326,12 @@ addTaxon <- function(taxonomy=NULL, taxon, format="peptide", URLs){
   return(param)
 }
 
+print.rTParam <- function(x, ...) {
+  # Where x is a rTParam object.
+  # print the defined parameter with minimal formating.
+  cat(paste("rTParam object with", sum(!is.na(x)),"defined parameters.\n\n"))
+  for(i in 1:length(x))
+    if (! is.na(x[[i]]) ){
+      cat(paste(names(x)[[i]],": \n\t", x[[i]], "\n\n", sep=""))
+    }
+}
