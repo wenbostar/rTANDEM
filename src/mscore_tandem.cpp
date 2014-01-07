@@ -170,8 +170,8 @@ mscore_tandem::mscore_tandem(void)
 		fV += (float)0.01;
 		a++;
 	}
-	m_fLog2 = (float)log(2.0);
-	m_fLog10 = (float)(1.0/log(10.0));
+	m_dLog2 = (float)log(2.0);
+	m_dLog10 = (float)(1.0/log(10.0));
 
 #ifdef MSVC
 	m_uiSimd = check_simd();
@@ -261,7 +261,7 @@ __inline__ bool mscore_tandem::blur(vector<mi> &_s)
  * fConvert and fFactor are only used if the m_lErrorType uses ppm for fragment ion mass errors
  * if ppm is used, the width at m/z = 200.0 is taken as the base width for blurring & the
  * width is scaled by the measured m/z. 
- * NOTE: the m_fErr value used in the ppm case is: (the error in ppm) x 200
+ * NOTE: the m_dErr value used in the ppm case is: (the error in ppm) x 200
  */
 	double dConvert = m_dErr/m_dWidth;
 	const double dFactor = 200.0/dConvert;
@@ -329,7 +329,7 @@ __inline__ float mscore_tandem::log_10(float _f)	{
 	int iV;
 	double man = frexp(_f,&iV);
 	int iM = (int)(man*100.0 + 0.5);
-	return (iV*m_fLog2 + m_pfLogs[iM])*m_fLog10;
+	return (iV*m_dLog2 + m_pfLogs[iM])*m_dLog10;
 }
 
 bool mscore_tandem::clear()

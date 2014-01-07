@@ -142,7 +142,7 @@ The End
 #include "mxxcleavage.h"
 #include "mtermmods.h"
 #include "mpam.h"
-
+#include "PTMTreeSearch.h"
 
 mrefine::mrefine()
 {
@@ -376,6 +376,24 @@ bool mrefine::refine()
 /*
  * 6. new mrefine derived classes here
  */
+	//PTMTreeSearch stuff begin
+	iRound = 7;
+	m_pProcess->set_round(iRound); // round 6
+	strKey = "refine, PTMTreeSearch";
+	m_pProcess->m_xmlValues.get(strKey,strValue);
+	if(strValue == "yes")	{
+		PTMTreeSearch *m_pPTMTreeSearch; //  the object that is used to process PTMTreeSearch
+		m_pProcess->m_bSaps = false;
+		m_pPTMTreeSearch = PTMTreeSearchmanager::create_PTMTreeSearch(m_pProcess->m_xmlValues);
+		if (m_pPTMTreeSearch == NULL) {
+			cout << "Failed to create PTMTreeSearch\n";
+			return false;
+		}
+		m_pPTMTreeSearch->set_mprocess(m_pProcess);
+		m_pPTMTreeSearch->refine();
+	}
+
+	//PTMTreeSearch stuff end
 
 /*
  * finish up and return
@@ -394,6 +412,11 @@ bool mrefine::refine()
 	}
 	return true;
 }
+
+
+
+
+
 
 /*
  * mrefinemanager contains static short-cuts for dealing with mrefine

@@ -192,7 +192,7 @@ mspectrumcondition::mspectrumcondition(void)
 	m_tMaxPeaks = 50;
 	m_fDynamicRange = 100.0;
 	m_fMinMass = 500.0;
-	m_fLowestMass = 150.0;
+	m_dLowestMass = 150.0;
 	m_fParentLower = 2.0;
 	m_fParentUpper = 2.0;
 	m_lMinSize = 5;
@@ -555,7 +555,7 @@ bool mspectrumcondition::load(XmlParameter &_x)
 	strKey = "spectrum, minimum fragment mz";
 	m_bUseLowestMass = _x.get(strKey,strValue);
 	if(m_bUseLowestMass)	{
-		m_fLowestMass = (float)atof(strValue.c_str());
+		m_dLowestMass = (float)atof(strValue.c_str());
 	}
 	strKey = "spectrum, use conditioning";
 	bool bCondition = _x.get(strKey,strValue);
@@ -735,7 +735,7 @@ bool mspectrumcondition::remove_parent(mspectrum &_s)
 	return true;
 }
 /*
- * remove_low_masses deletes peaks with m/z values below the m_fLowestMass member value
+ * remove_low_masses deletes peaks with m/z values below the m_dLowestMass member value
  */
 bool mspectrumcondition::remove_low_masses(mspectrum &_s)
 {
@@ -743,7 +743,7 @@ bool mspectrumcondition::remove_low_masses(mspectrum &_s)
 		return false;
 	vector<mi>::iterator itMI = _s.m_vMI.begin();
 	while(itMI != _s.m_vMI.end())	{
-		if(itMI->m_fM > m_fLowestMass)	{
+		if(itMI->m_fM > m_dLowestMass)	{
 			break;
 		}
 		itMI++;
@@ -827,11 +827,11 @@ bool mspectrumcondition::set_max_charge(const long _m)
 	return true;
 }
 /*
- * set_lowest_mass sets the current value of the m_fLowestMass member
+ * set_lowest_mass sets the current value of the m_dLowestMass member
  */
 bool mspectrumcondition::set_lowest_mass(const float _m)
 {
-	m_fLowestMass = _m;
+	m_dLowestMass = _m;
 	return true;
 }
 /*
