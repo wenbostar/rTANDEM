@@ -166,8 +166,8 @@ protected:
 	bool blur(vector<mi> &_s);
 	float log_10(const float _f);
 	float *m_pfLogs;
-	float m_fLog2;
-	float m_fLog10;
+	float m_dLog2;
+	float m_dLog10;
 	float m_fScale;
 protected:
 	vector<vmiType> m_vmiType;
