@@ -17,12 +17,12 @@
 #include "msequencecollection.h"
 
 //#ifdef PARALELL_PTMTREESEARCH
-#ifndef MSVC
+//#define USE_MPI
+#ifdef USE_MPI
 #include "ownercompute.h"
 #include "mpi.h"
 #endif
 
-//#define USE_MPI
 
 bool reverseOrderFNC(float a,float b){
 	return a>b;
@@ -332,24 +332,7 @@ bool PTMTreeSearch::refine()
 
 	char forward_modifications_fname[256];
 	char   decoy_modifications_fname[256];
-#ifndef MSVC
-//	sprintf(forward_modifications_fname, "_mod_stat_%d.txt", MPI::COMM_WORLD.Get_rank() );
-#else
-#endif
-//	sprintf(forward_modifications_fname, "sequences.txt");
-	sprintf(forward_modifications_fname, "sequences_proc_%d.txt", MPI::COMM_WORLD.Get_rank() );
-	FILE* ff ;
-/*	if(m_pProcess->m_lThread == 0 || m_pProcess->m_lThread == 0xFFFFFFFF)	{
-		ff = fopen(forward_modifications_fname, "w");	
-		for (a = 0;  a < m_pProcess->m_vseqBest.size(); a++){
-			fprintf(ff, "%d\t", m_pProcess->m_vseqBest[a].m_tUid);
-			fprintf(ff, "%s\t", m_pProcess->m_vseqBest[a].m_strDes.c_str());
-			fprintf(ff, "%s\n", m_pProcess->m_vseqBest[a].m_strSeq.c_str());
-		}
-			fclose(ff);				
-	}
-*/	//spectrum-peptide scoring
-	ff = fopen(forward_modifications_fname, "w");	
+
 	for (a = 0;  a < m_pProcess->m_vseqBest.size(); a++){
 		m_pProcess->score(m_pProcess->m_vseqBest[a]);
 
@@ -626,9 +609,9 @@ bool PTMTreeSearch::refine()
 	
 
 	for (a = 0;  a < m_pProcess->m_vseqBest.size(); a++){
-		fprintf(ff, "%d\t", m_pProcess->m_vseqBest[a].m_tUid);
-		fprintf(ff, "%s\t", m_pProcess->m_vseqBest[a].m_strDes.c_str());
-		fprintf(ff, "%s\n", m_pProcess->m_vseqBest[a].m_strSeq.c_str());
+		//fprintf(ff, "%d\t", m_pProcess->m_vseqBest[a].m_tUid);
+		//fprintf(ff, "%s\t", m_pProcess->m_vseqBest[a].m_strDes.c_str());
+		//fprintf(ff, "%s\n", m_pProcess->m_vseqBest[a].m_strSeq.c_str());
 	
 		m_pProcess->score(m_pProcess->m_vseqBest[a]);
 		tPips++;
@@ -641,7 +624,7 @@ bool PTMTreeSearch::refine()
 			tPips = 0;
 		}
 	}
-	fclose(ff);				
+	//fclose(ff);				
 	
 	//clear modifications
 	for (int i = 0; i < 255; i++){
