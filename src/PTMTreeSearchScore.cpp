@@ -29,6 +29,26 @@ mplugin* mscorefactory_PTMTreeSearch::create_plugin()
 {
     return new PTMTreeSearchScore();
 }
+
+/*
+ * mconvert converts from mass and charge to integer ion value
+ * for mi vector.
+ */
+unsigned long PTMTreeSearchScore::mconvert(double _m, const double _z)
+{
+  return (unsigned long)((m_pSeqUtilFrag->m_dProton + _m/_z)*m_dWE);
+}
+unsigned long mscore::mconvert(double _m, const long _c)
+{
+/*
+ * calculate the conversion factor between an m/z value and its integer value
+ * as referenced in m_vsmapMI
+ */
+	const double dZ = (double)_c;
+	return (unsigned long)((m_pSeqUtilFrag->m_dProton + _m/dZ)*m_dWidth/m_dErr);
+}
+
+
 PTMTreeSearchScore::PTMTreeSearchScore(){
 //	mscore_tandem::mscore_tandem();
 	m_bRefine = false;

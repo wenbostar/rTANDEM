@@ -107,7 +107,8 @@ public:
 		match_B = 0x01,
 		match_Y = 0x02,
 	} MatchType;
-
+	unsigned long mconvert(double _m, const double _z);
+	unsigned long mconvert(double _m, const long _c);
 	unsigned int	m_uiIonTypeNum;
 	unsigned int	m_uiPtmBound;
 	double**		m_pdMods;
