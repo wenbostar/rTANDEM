@@ -14,7 +14,7 @@
 #include <float.h>
 #include <algorithm>
 #include "mscore.h"
-#include "stack_ptmtreesearch"
+#include "stack_ptmtreesearch.h"
 //#include "priority_deque"
 
 // Factory instance, registers itself with the mscoremanager.
