@@ -199,7 +199,7 @@ private:
 	bool m_bUseAllowedNeutralLosses;
 	size_t m_tMaxPeaks; // the maximum number of peaks in a spectrum
 	float m_fDynamicRange; // the normalized intensity of the most intense peak in a spectrum
-	float m_dLowestMass; // the lowest m/z in a spectrum
+	float m_fLowestMass; // the lowest m/z in a spectrum
 	long m_lMinSize; // the minimum number of peaks in a spectrum
 	float m_fMinMass; // the minimum parent ion mass in a spectrum
 	float m_fParentLower; // the low end of the mass window for excluding parent ion neutral losses

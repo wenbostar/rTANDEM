@@ -384,7 +384,7 @@ protected:
 public:
 	unsigned long add_seq(const char *_s,const bool _n,const bool _c,const unsigned long _l,const int _f);
 	bool sort_details();
-	bool get_aa(vector<maa> &_m,const size_t _a,double &_d);
+	virtual bool get_aa(vector<maa> &_m,const size_t _a,double &_d);
 	double get_mh()	{
 		return m_dSeqMH;
 	};
