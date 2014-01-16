@@ -377,11 +377,11 @@ bool mrefine::refine()
 	 * 6. new mrefine derived classes here
 	 */
 	//PTMTreeSearch stuff begin
-	iRound = 7;
-	m_pProcess->set_round(iRound); // round 6
 	strKey = "refine, PTMTreeSearch";
 	m_pProcess->m_xmlValues.get(strKey,strValue);
 	if(strValue == "yes")	{
+	  iRound = 7;
+	  m_pProcess->set_round(iRound); // round 6
 	  PTMTreeSearch *m_pPTMTreeSearch; //  the object that is used to process PTMTreeSearch
 	  m_pProcess->m_bSaps = false;
 	  m_pPTMTreeSearch = PTMTreeSearchmanager::create_PTMTreeSearch(m_pProcess->m_xmlValues);
