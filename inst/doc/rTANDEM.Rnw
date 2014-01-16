@@ -107,6 +107,34 @@ You now have default parameters with sensible default values for your two instru
 Those objects now allow you to use the \begin{tt}rtandem\end{tt} syntax to launch analysis. For example, to analyse data obtained from your 5600, you would use:
 \begin{tt}result <- rtandem('path/to/your/data/file', 'human', taxonomy, 5600.params)\end{tt}
 
+\section{New Scoring functions}
+In 2005, x!tandem has been modified to allow a 'plug-in' approach to refinement (see MacLean et al, 2005). It is thus possible to design new scoring functions for x!tandem. Many such functions have been developped and the following scoring functions are available in rTANDEM: the k-score function, the hrk-score function and the PTMTreeSearch score function. 
+
+\subsection{k-score function}
+The k-score function was implemented by Brendan MacLean based on a scoring function described in Keller A. et al, 2002 and 2005.\\
+To use the function, set the scoring algorithm to 'k-score' in your parameter object:\\
+\begin{tt}par <- setParamValue(par, 'scoring', 'algorithm', value='k-score')\end{tt}\\
+It is also recommended to disable spectrum conditioning and to set minimum ion count to 1:\\
+\begin{tt}
+  par <- setParamValue(par, 'scoring', 'minimum ion count', value=1)\\
+  par <- setParamValue(par, 'spectrum', 'use conditioning', value='no')
+\end{tt}
+
+\subsection{hrk-score function}
+The hrk-score function, or high-resolution k-score function, was developped by the Trans-Proteomic Pipeline (TPP) team. It is directly based on the k-score functions, but redefine some computations to fully benefit from high resolution data.\\
+To use the function, set the scoring algorithm to 'hrk-score'. It is also recommended to disable spectrum conditioning and to set minimum ion count to 1:
+\begin{tt}
+  par <- setParamValue(par, 'scoring', 'algorithm', value='hrk-score')\\
+  par <- setParamValue(par, 'scoring', 'minimum ion count', value=1)\\
+  par <- setParamValue(par, 'spectrum', 'use conditioning', value='no')
+\end{tt}
+
+\subsection{PTMTreeSearch}
+The PTMTreeSearch function was developped by Attila Kertesz-Farkas. It is described in  Kertes-Farkas et al., 2013, and some documentation can be found at \href{http://net.icgeb.org/ptmtreesearch/doc/ptmtreesearch\_help.htm}{Tandem with PTMTreeSearch website}. 
+Since PTMTreeSearch comprises many parameters, a function is supplied to set them all in a single step:\\
+\begin{tt}param <- setParamPTMTreeSearch(param)\end{tt}\\
+This will set the scoring algorithm to 'ptmtreesearch-score', with sensible default values and use the lists of modifications and residues installed with rTANDEM. You can also use up-to-date modification lists from unimod or uniprot and link to them using the parameters 'refine, PTMTreeSearch uniprot modif file' or 'refine, PTMTreeSearch unimod modif file'. 
+
 \section{rTANDEM typical usage}
 
 First of all, we must load rTANDEM into the session:
