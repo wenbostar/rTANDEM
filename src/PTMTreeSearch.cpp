@@ -277,7 +277,7 @@ bool PTMTreeSearch::refine()
   if (m_pProcess->m_lThread == 0 || m_pProcess->m_lThread == 0xFFFFFFFF){
     //cout << "\t\tNumber of unique modifications that have been loaded is:" << modCnt << endl;
     //cout << "\t\t";
-    Rprintf("\t\tNumber of unique modifications that have been loaded is: %u \n", modCnt);
+    Rprintf("\t\tNumber of unique modifications that have been loaded is: %lu \n", modCnt);
     Rprintf("\t\t");
   }
   
@@ -543,7 +543,7 @@ bool PTMTreeSearch::refine()
   
   if(m_pProcess->m_lThread == 0 || m_pProcess->m_lThread == 0xFFFFFFFF)	{
     //    cout << "\t\tNumber of unique modifications have been found is:" << modCnt << endl << "\t\t";
-    Rprintf("\t\tNumber of unique modifications have been found is: %u \n", modCnt);
+    Rprintf("\t\tNumber of unique modifications have been found is: %lu \n", modCnt);
     Rprintf("\t\t");
   }
   
@@ -573,7 +573,7 @@ bool PTMTreeSearch::refine()
   if(m_pProcess->m_lThread == 0 || m_pProcess->m_lThread == 0xFFFFFFFF)	{
     //		cout << "\t\tNumber of unique modifications that have been loaded is:" << modCnt << endl << "\t\t"; /// commented out before rTANDEM
     //cout << "\t\tPTMBound = " << uiPtmBound << endl << "\t\t";
-    Rprintf("\t\tPTMBound = %u \n",uiPtmBound);
+    Rprintf("\t\tPTMBound = %lu \n",(unsigned long)uiPtmBound);
     Rprintf("\t\t");
   }
   
