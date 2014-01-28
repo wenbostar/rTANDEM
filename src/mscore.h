@@ -391,7 +391,7 @@ public:
 	bool load_next(void);
 	bool load_state(void);
 	bool load_seq(const unsigned long _t,const long _c);
-	double seq_mh(void); // changed from float to accomodate more accurate parent ion mass calculation (2005.02.01)
+	virtual double seq_mh(void); // changed from float to accomodate more accurate parent ion mass calculation (2005.02.01)
 	unsigned long set_seq(const char *_s,const bool _n,const bool _c,const unsigned long _l,const int _f);
 	bool set_isotope_error(const bool _b);
 	unsigned long set_type(const unsigned long _t);
