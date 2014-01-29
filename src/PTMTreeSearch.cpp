@@ -335,9 +335,6 @@ bool PTMTreeSearch::refine()
   vector<mspectrum> vSpectra;
   vSpectra = m_pProcess->m_vSpectra;
   
-  char forward_modifications_fname[256];
-  char   decoy_modifications_fname[256];
-  
   for (a = 0;  a < m_pProcess->m_vseqBest.size(); a++){
     m_pProcess->score(m_pProcess->m_vseqBest[a]);
     
@@ -614,9 +611,6 @@ bool PTMTreeSearch::refine()
   
   
   for (a = 0;  a < m_pProcess->m_vseqBest.size(); a++){
-    //fprintf(ff, "%d\t", m_pProcess->m_vseqBest[a].m_tUid);
-    //fprintf(ff, "%s\t", m_pProcess->m_vseqBest[a].m_strDes.c_str());
-    //fprintf(ff, "%s\n", m_pProcess->m_vseqBest[a].m_strSeq.c_str());
     
     m_pProcess->score(m_pProcess->m_vseqBest[a]);
     tPips++;
@@ -628,7 +622,6 @@ bool PTMTreeSearch::refine()
       tPips = 0;
     }
   }
-  //fclose(ff);				
   
   //clear modifications
   for (int i = 0; i < 255; i++){
@@ -642,13 +635,16 @@ bool PTMTreeSearch::refine()
   if(m_pProcess->m_lThread == 0 || m_pProcess->m_lThread == 0xFFFFFFFF)	{
     Rprintf(" done.\n"); //cout << " done.\n";
   }
+
   //Send the results via email
+  /*
   char emailcommand[2048];
   string strEmailAddress;
   strKey = "output, path";
   if(m_pProcess->m_lThread == 0 || m_pProcess->m_lThread == 0xFFFFFFFF)	{
     if (m_pProcess->m_xmlValues.get(strKey,strValue)){
       strKey = "refine, PTMTreeSearch emailaddress";
+
       if (m_pProcess->m_xmlValues.get(strKey,strEmailAddress)){
 	
 	sprintf(emailcommand, "echo \"PTMTreeSearch results can be seen at:\n\n http://net.icgeb.org/thegpm-cgi/plist.pl?npep=0&path=/thegpm-cgi/%s&proex=-1&ltype= \" | mailx -s \"Peptide identification results with PTMTreeSearch\" -r noreply@icgeb.org -S smtp=smtp://smtp.icgeb.trieste.it:25 %s\n", strValue.c_str(),strEmailAddress.c_str() );
@@ -656,7 +652,7 @@ bool PTMTreeSearch::refine()
       }
     }
   }
-  
+  */
   return true;
 }
 
