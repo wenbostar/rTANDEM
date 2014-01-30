@@ -119,15 +119,15 @@ rTParam <- function() {
                       "refine, PTMTreeSearch mass upper bound" = NA,
                       "refine, PTMTreeSearch keep fixed modifications" = NA,
                       "refine, PTMTreeSearch 1r ptm bound" = NA,
-                      "refine, PTMTreeSearch 1r ptmhit check" = NA, 
+                      "refine, PTMTreeSearch 1r NPM" = NA, 
                       "refine, PTMTreeSearch 1r SR" = NA,
-                      "refine, PTMTreeSearch 1r MEM th" = NA, 
+                      "refine, PTMTreeSearch 1r MPE" = NA, 
                       "refine, PTMTreeSearch 1r min eval" = NA, 
                       "refine, PTMTreeSearch 2r" = NA, 
                       "refine, PTMTreeSearch 2r ptm bound" = NA,
-                      "refine, PTMTreeSearch 2r no ptmhit check limit" = NA, 
+                      "refine, PTMTreeSearch 2r no NPM limit" = NA, 
                       "refine, PTMTreeSearch 2r SR" = NA,
-                      "refine, PTMTreeSearch 2r MEM th" = NA,
+                      "refine, PTMTreeSearch 2r MPE" = NA,
                       check.names=FALSE
                       )
   class(rTParam)<-c("data.frame", "rTParam")
@@ -238,21 +238,21 @@ setParamPTMTreeSearch <- function(param=NULL) {
     "scoring", "algorithm", "ptmtreesearch-score",
     "spectrum", "threads", 1,
     "refine", "PTMTreeSearch", "yes",
-    "refine", "PTMTreeSearch unimod modif file",
-       system.file("extdata/unimod.xml", package="rTANDEM"),
+    "refine", "PTMTreeSearch uniprot modif file",
+       system.file("extdata/ptmlist.txt", package="rTANDEM"),
     "refine", "PTMTreeSearch mass lower bound", 50,
     "refine", "PTMTreeSearch mass upper bound", 200,
     "refine", "PTMTreeSearch keep fixed modifications", "no",
     "refine", "PTMTreeSearch 1r ptm bound", 1,
-    "refine", "PTMTreeSearch 1r ptmhit check", "yes",
+    "refine", "PTMTreeSearch 1r NPM", "yes",
     "refine", "PTMTreeSearch 1r SR", 0.4,
-    "refine", "PTMTreeSearch 1r MEM th", 0.99,
+    "refine", "PTMTreeSearch 1r MPE", 0.99,
     "refine", "PTMTreeSearch 1r min eval", -3.0,
     "refine", "PTMTreeSearch 2r", "yes",
     "refine", "PTMTreeSearch 2r ptm bound", 1,
-    "refine", "PTMTreeSearch 2r no ptmhit check limit", 1000,
+    "refine", "PTMTreeSearch 2r no NPM limit", 1000,
     "refine", "PTMTreeSearch 2r SR", 0.30,
-    "refine", "PTMTreeSearch 2r MEM th", 0.00 ) )
+    "refine", "PTMTreeSearch 2r MPE", 0.00 ) )
 
   for( i in 1:nrow(myValues) ){
     param <- setParamValue(param, myValues[[i,1]], myValues[[i,2]], myValues[[i,3]])
