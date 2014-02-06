@@ -128,7 +128,7 @@ To use the function, set the scoring algorithm to 'hrk-score'. It is also recomm
 \end{tt}
 
 \subsection{PTMTreeSearch}
-The PTMTreeSearch function was developped by Attila Kertesz-Farkas. It is described in  Kertesz-Farkas\citep{PTMTS}, and some documentation can be found at \href{http://net.icgeb.org/ptmtreesearch/doc/ptmtreesearch\_help.htm}{Tandem with PTMTreeSearch website}. 
+The PTMTreeSearch function was developped by Attila Kertesz-Farkas. It is described in  Kertesz-Farkas\citep{PTMTS}, and some documentation can be found at \href{http://net.icgeb.org/tandem/ptmtreesearch\_help.htm}{Tandem with PTMTreeSearch website}. 
 Since PTMTreeSearch comprises many parameters, a function is supplied to set them all in a single step:\\
 \begin{tt}param <- setParamPTMTreeSearch(param)\end{tt}\\
 This will set the scoring algorithm to 'ptmtreesearch-score', with sensible default values and use a small list of modifications installed with rTANDEM. You can also use up-to-date modification lists from unimod or uniprot and link to them using the parameters 'refine, PTMTreeSearch uniprot modif file' or 'refine, PTMTreeSearch unimod modif file'. 
@@ -223,7 +223,7 @@ getBM(mart=ensembl.mart, filters="ensembl_peptide_id", values="YFR053C",
 \bibitem{beavis2004}
   Craig R, Beavis RC \textbf{[2004]} TANDEM:matching proteins with tandem mass spectra. \textit{Bioinformatics} 20(9):1466-7.
 \bibitem{PTMTS}
-  Kertesz-Farkas A, Reiz B, Vera R, Myers MP, Pongor S \textbf{[2013]} PTMTreeSearch: a novel two-stage tree-search algorithm with pruning rules for the identification of post-translational modification of proteins in MS/MS spectra. \textit{Bioinformatics}, 30(2):234-41.
+  Kertesz-Farkas A, Reiz B, Vera R, Myers MP, Pongor S \textbf{[2014]} PTMTreeSearch: a novel two-stage tree-search algorithm with pruning rules for the identification of post-translational modification of proteins in MS/MS spectra. \textit{Bioinformatics}, 30(2):234-41.
 \bibitem{maclean}
   MacLean B, Eng JK, McIntosh M \textbf{[2006]} General framework for developing and evaluating database scoring algorithms using the TANDEM search engine. \textit{Bioinformatics} 22(22):2830-2.
 \bibitem{keller2005}

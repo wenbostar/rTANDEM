@@ -1,9 +1,12 @@
-/* PTMSearch plugin
-	Added by Attila Kertesz-Farkas
+/* PTMTreeSearch plugin
+For furter details see or if PTMTreeSearch is used in a study please cite the following article:
+PTMTreeSearch: a novel two-stage tree-search algorithm with pruning rules for the identification of post-translational modification of proteins in MS/MS spectra
+Attila Kertesz-Farkas, Beata Reiz, Roberto Vera, Michael P Myers, Sandor Pongor
+Bioinformatics 30 (2), 234-241, 2014 
 
-	FILE version: 2013-Febr-11
-
+FILE version: 2013-Febr-11  // Modified for rTANDEM on January 2014
 */
+
 #include "mscore.h"
 #include "mscore_tandem.h"
 #include "mprocess.h"
