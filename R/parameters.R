@@ -392,3 +392,11 @@ print.rTParam <- function(x, ...) {
       cat(paste(names(x)[[i]],": \n\t", x[[i]], "\n\n", sep=""))
     }
 }
+
+## Capitalization aliases
+SetParamValue <- setParamValue
+SetParamDefault <- setParamDefault
+SetParamPTMTreeSearch <- setParamPTMTreeSearch
+SetParamQuadTof100ppm <- setParamQuadTof100ppm
+SetParamIonTrap <- setParamIonTrap
+AddTaxon <- addTaxon
