@@ -1,4 +1,4 @@
-rtandem <- function (data.file, taxon, taxonomy, default.parameters) {
+rtandem <- function (data.file, taxon, taxonomy, default.parameters, output.path=NA) {
   # Interface to tandem(input). This function createsCreates a basic input file
   #   and launch tandem(input) on this input file.
   # Args:
@@ -25,6 +25,10 @@ rtandem <- function (data.file, taxon, taxonomy, default.parameters) {
   }
   input$`list path, taxonomy information` <- taxonomy
   input$`list path, default parameters`   <- default.parameters
+  if ( ! is.na(output.path) ){
+    input$`output, path` <- output.path
+  }
+  
   tandem(input)
 }
 
